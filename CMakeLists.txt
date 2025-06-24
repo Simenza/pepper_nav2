@@ -160,5 +160,10 @@ install(DIRECTORY share DESTINATION share/${PROJECT_NAME})
 # install the launch files
 install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
 
+install(PROGRAMS
+  scripts/create_request.py
+  scripts/send_goal.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 ament_export_libraries(naoqi_driver)
 ament_package()
