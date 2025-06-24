@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Attendi completamento</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f4f4f4; }
+    h1 { color: #333; }
+    p { font-size: 1.2em; }
+    /* Puoi aggiungere uno spinner CSS se vuoi */
+  </style>
+</head>
+<body>
+  <h1>Sto raccogliendo gli ingredienti...</h1>
+  <p>ATTENZIONE! Lasciare libero il passaggio!</p>
+
+  <script>
+    setInterval(() => {
+      fetch('/check_finished')
+        .then(response => response.json())
+        .then(data => {
+          if (data.finished) {
+            window.location.reload();
+          }
+        });
+    }, 2000);  // controlla ogni 2 secondi
+  </script>
+</body>
+</html>

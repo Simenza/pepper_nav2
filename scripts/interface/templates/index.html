@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Seleziona la ricetta</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f7f9fc;
+      color: #333;
+      margin: 0; padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .recipe-card {
+      background: white;
+      border-radius: 5px; /* meno arrotondato */
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 250px; /* larghezza fissa */
+      text-align: center;
+      padding: 15px;
+      transition: box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .recipe-card:hover {
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+    .recipe-image {
+      width: 100%;   /* si adatta al contenitore */
+      height: auto;  /* mantiene proporzioni */
+      border-radius: 5px; /* meno arrotondato */
+      margin-bottom: 15px;
+      display: block;
+    }
+    .recipe-name {
+      font-size: 1.3em;
+      margin-bottom: 15px;
+      color: #2c3e50;
+      text-transform: none;
+    }
+    button {
+      background-color: #3498db;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 style="width:100%; text-align:center; margin-bottom: 40px;">Seleziona una ricetta</h1>
+
+  {% for recipe in recipes %}
+  <div class="recipe-card">
+    <img src="{{ url_for('static', filename='images/' + recipe.name + '.jpg') }}" alt="{{ recipe.name }}" class="recipe-image" />
+    <div class="recipe-name">{{ recipe.name.replace('_', ' ').capitalize() }}</div>
+    <form method="POST" action="/select">
+      <input type="hidden" name="recipe" value="{{ recipe.name }}" />
+      <button type="submit">Seleziona</button>
+    </form>
+  </div>
+  {% endfor %}
+
+</body>
+</html>
